@@ -7,10 +7,12 @@ var stage;
 function init() {
 
 	// create a new stage and point it at our canvas:
-	var stage = new createjs.Stage(document.getElementById("testCanvas"));
+	var canvas = document.getElementById("testCanvas");
+	var stage = new createjs.Stage(canvas);
 	window.stage = stage;
 
 	stage.enableMouseOver();
+	//stage.suppressCrossDomainErrors  = true;
 
 	//stage.snapToPixelsEnabled = true;
 	
@@ -21,7 +23,13 @@ function init() {
 	createjs.Ticker.addListener(window);
 
 	var game = new Game(window.stage, null, mapTileCountX, mapTileCountY);
+	var myUnit = new Unit(window.stage, null, game); 
 	var itemUI = new ItemUI(window.stage, null, game); 
+
+	
+	canvas.addEventListener("click", function (event) { game.onClick(event); }, false); //stage.onClick broke my button event !! :(
+	stage.onMouseMove = function (event) { game.onMouseMove(event); }
+
 
 	stage.update();
 }

@@ -51,7 +51,7 @@
 		for (var j = 0; j < tileCountY; j++) {
 			this.tiles[j] = [];
 			for (var i = 0; i < tileCountX; i++) {
-				var val = 113;
+				var val = 86;
 				var row = this.tiles[j];
 				var sprite = new createjs.BitmapAnimation(spriteSheet);
 				row[i] = {"val" : val, "sprite" : sprite};
