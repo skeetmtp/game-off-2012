@@ -4,6 +4,7 @@ function init() {
 
 	// create a new stage and point it at our canvas:
 	 stage = new createjs.Stage(document.getElementById("testCanvas"));
+	 //stage.snapToPixelsEnabled = true;
 
 	// Define a spritesheet. Note that this data was exported by Zoë.
 	var ss = new createjs.SpriteSheet({
@@ -29,11 +30,11 @@ function init() {
 
 	// Add Grant to the stage, and add it as a listener to Ticker to get updates each frame.
 	stage.addChild(grant);
-	createjs.Ticker.setFPS(60);
-	createjs.Ticker.addListener(stage);
-
-	createjs.Ticker.addListener(window);
+	createjs.Ticker.setFPS(30);
     createjs.Ticker.useRAF = true;
+
+	//createjs.Ticker.addListener(stage);
+	createjs.Ticker.addListener(window);
 }
 
 function reset() {
@@ -43,8 +44,8 @@ function reset() {
 }
 
  function tick() {
- 	//stage.update();
-
+	stage.update();
+ 	
  	var curFPS = createjs.Ticker.getMeasuredFPS();
  	document.getElementById("fps").innerHTML ="fps = " + curFPS.toFixed(2); 
  }

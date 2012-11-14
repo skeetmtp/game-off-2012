@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CxC</title>
+	<script>
+    	//createjs = window;
+    	//var enableRAF = true;
+	</script>
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+	<script src="http://craigsworks.com/projects/qtip2/packages/nightly/jquery.qtip.js"></script>
+	<link rel="stylesheet" href="http://craigsworks.com/projects/qtip2/packages/nightly/jquery.qtip.css" />
+
+	<script src="./lib/easeljs.min.js"></script>
+	<script src="./js/ui.js"></script>
+	<script src="./js/game.js"></script>
+	<script src="./js/map.js"></script>
+	<script src="./js/main.js"></script>
+	
+	<script>
+		$(document).ready(function()
+		{
+		    function setViewport(img, x, y, width, height) {
+		        img.style.left = "-" + x + "px";
+		        img.style.top  = "-" + y + "px";
+
+		        if (width !== undefined) {
+		            img.parentNode.style.width  = width  + "px";
+		            img.parentNode.style.height = height + "px";
+		        }
+		    }
+			//$('#btn').css({  'padding-left': '-20px', 'padding-bottom': '0px' });
+		    $(".itemButton").button();
+		    $(".itemButton").on("click", { name: "Toto" }, function(event) {
+		    	console.log(">"+$(this).attr('id')+" "+event.data.name);
+	        });  
+		    /*
+		    $(".itemButton").click(function() {
+		    	//alert('button clicked');
+		    	console.log(">"+$(this).attr('id'));
+	        });  
+			*/
+		    $(".itemImage").each( function(index, element) { 
+		    	setViewport(element, 0, 0, 32, 32);
+			});
+/*
+            $(".itemButton").qtip({
+    			content: {
+  				text: '<p> blabla </p><img src="./img/icon.png" alt="Owl" />'
+  				}
+			});
+*/
+		});
+	</script>
+	
+</head>
+
+<style type="text/css">
+
+    div.viewport {
+        overflow: hidden;
+        position: relative;
+    }
+
+    img.clipped {
+        display: block;
+        position: absolute;
+    }
+</style>
+
+
+<body onload="init();">
+<!-- <body> -->
+	<header id="header" class="EaselJS">
+	</header>
+	<p id="fps"> fps </p> 
+	<div id='btn1' class="itemButton">
+		<div class="viewport">
+			<img class="clipped itemImage" id="image1" src='img/lofi_obj.png'/>
+		</div>
+	</div>
+	
+	<div id='btn2' class="itemButton">
+		<div class="viewport">
+			<img class="clipped itemImage" id="image1" src='img/lofi_obj.png'/>
+		</div>
+	</div>
+	
+
+	<div id='uiItem'>
+		<table>
+			<tr>
+				<td>
+	<div class="canvasHolder">
+		<canvas id="testCanvas" width="512" height="720"></canvas>
+	</div>
+				</td>
+				<td>
+				<table>
+					<tr>
+						<td>
+						a
+						</td>
+					</tr>
+					<tr>
+						<td>
+						b
+						</td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+</body>
+</html>
