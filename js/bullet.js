@@ -1,6 +1,6 @@
 
 (function (window) {
-	function Unit(stage, contentManager, game, spriteSheetFileName, spriteIndex) {
+	function Bullet(stage, contentManager, game, spriteIndex) {
 		this.stage = stage;
         this.contentManager = contentManager;
         this.game = game;
@@ -10,7 +10,7 @@
 
 
 		var spriteSheet = new createjs.SpriteSheet({
-			"images": [spriteSheetFileName],
+			"images": ["img/lofi_obj.png"],
 			"frames":
 				{
 					"height": cellWidth,
@@ -32,17 +32,17 @@
 
 	};
  
-	Unit.prototype.setCellPosition = function (cx,cy) {
+	Bullet.prototype.setCellPosition = function (cx,cy) {
 		this.x = cx * cellWidth;
 		this.y = cy * cellHeight;
 	}
 
-	Unit.prototype.tick = function () {
+	Bullet.prototype.tick = function () {
 		this.sprite.x = this.x;
 		this.sprite.y = this.y;
     };
 
-	window.Unit = Unit;
+	window.Bullet = Bullet;
 } (window));
 
 

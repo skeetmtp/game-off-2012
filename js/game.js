@@ -25,15 +25,19 @@
 
     Game.prototype.onMouseMove = function (event) {
             var x = event.rawX;
-            var maxX = this.map.getWidth();
-            if(x>maxX)
-                x=maxX;
             var y = event.rawY;
-            var maxY = this.map.getHeight();
-            if(y>maxY)
-                y=maxY;
-            this.cursor.cellX = Math.round(x / cellWidth);
-            this.cursor.cellY = Math.round(y / cellHeight);
+            var cx = Math.round(x / cellWidth  - 0.5);
+            var cy = Math.round(y / cellHeight - 0.5);
+            /*
+            var visible = true;
+            if(cx>=this.tileCountX)
+                visible = false;
+            if(cy>=this.tileCountY)
+                visible = false;
+            this.cursor.sprite.visible = visible;
+            */
+            this.cursor.cellX = cx;
+            this.cursor.cellY = cy;
     };
 
     Game.prototype.onClick = function (event) {

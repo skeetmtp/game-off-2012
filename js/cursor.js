@@ -28,8 +28,8 @@
 		sprite.paused = true;
 		this.sprite = sprite;
 
-		this.cellX = 1;
-		this.cellY = 1;
+		this.cellX = 100;
+		this.cellY = 100;
 
 		stage.addChild(sprite);
 

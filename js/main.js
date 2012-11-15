@@ -23,8 +23,19 @@ function init() {
 	createjs.Ticker.addListener(window);
 
 	var game = new Game(window.stage, null, mapTileCountX, mapTileCountY);
-	var myUnit = new Unit(window.stage, null, game); 
 	var itemUI = new ItemUI(window.stage, null, game); 
+	
+	var tower = new Tower(window.stage, null, game); 
+	tower.setCellPosition(1,0);
+
+	var treasure = new Treasure(window.stage, null, game); 
+	treasure.setCellPosition(2,0);
+
+	var hero = new Hero(window.stage, null, game); 
+	hero.setCellPosition(2,7);
+
+	//var bullet = new Bullet(window.stage, null, game, 96); 
+	//var myUnit = new Unit(window.stage, null, game, "img/lofi_char.png", 1); 
 
 	
 	canvas.addEventListener("click", function (event) { game.onClick(event); }, false); //stage.onClick broke my button event !! :(
