@@ -5,13 +5,14 @@
         this.contentManager = contentManager;
         this.game = game;
 		createjs.Ticker.addListener(this);
-		this.x = 0;
-		this.y = 0;
-		this.dir = {x:0, y:0};
+
+		this.defaultLifeTime = 1500;
+		this.damage = 50;
 		this.speed = 100;
-		this.lifeTime = 1500;
 		this.hitRange = 16;
 		this.enabled = true;
+
+		this.reset();
 
 
 		var spriteSheet = new createjs.SpriteSheet({
@@ -37,6 +38,28 @@
 
 	};
 
+	Bullet.prototype.reset = function () {
+		this.x = 0;
+		this.y = 0;
+		this.dir = {x:0, y:0};
+		this.lifeTime = this.defaultLifeTime;
+	}
+
+	Bullet.prototype.destroy = function () {
+		this.disable();
+	}
+ 
+	Bullet.prototype.disable = function () {
+		this.enabled = false;
+		this.sprite.visible = this.enabled;
+	}
+ 
+	Bullet.prototype.enable = function () {
+		this.reset();
+		this.enabled = true;
+		this.sprite.visible = this.enabled;
+	}
+ 
 	Bullet.prototype.setTarget = function (target) {
 		this.dir.x = target.x - this.x;
 		this.dir.y = target.y - this.y;
@@ -53,11 +76,6 @@
 
 	Bullet.prototype.setCellPosition = function (cx,cy) {
 		setPosition(cx * cellWidth,cy * cellHeight);
-	}
-
-	Bullet.prototype.disable = function () {
-		this.enabled = false;
-		this.sprite.visible = false;
 	}
 
 	Bullet.prototype.tick = function (timeElapsed) {
@@ -87,7 +105,10 @@
 			var dy = this.y - hero.y;
 			var dist = NormVec2D(dx,dy);
 			if(dist<this.hitRange)
-				console.log("hit");
+			{
+				hero.hit(this.damage);
+				this.destroy();
+			}
 		}
     };
 

@@ -30,7 +30,11 @@
 		//console.log("throwBullet");
 		this.currentCooldown = this.defaultCooldown;
 		var target = this.game.findNearestHero(this.x,this.y);
-		var bullet = this.game.spawnBullet(this.x, this.y);
+		if(target==null)
+			return;
+		var bullet = this.game.spawn(Bullet, this.x, this.y);
+		if(bullet==null)
+			return;
 		bullet.setTarget(target);
 	}
 

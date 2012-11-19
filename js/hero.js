@@ -11,6 +11,14 @@
         this.components.push(new HeroSimpleMove(this));
 	};
 
+	Hero.prototype.hit = function (hitPoints) {
+		this.destroy();
+	}
+
+	Hero.prototype.destroy = function () {
+		this.disable();
+	}
+
 	Hero.prototype.tick = function (timeElapsed) {
 		Unit.prototype.tick.call(this, timeElapsed);
 
@@ -18,6 +26,8 @@
             this.components[i].tick(timeElapsed);
         };
 
+        if(this.x>this.game.getWidth())
+        	this.destroy();
 
     };
 

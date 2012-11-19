@@ -13,7 +13,7 @@
 
         this.preAllocs = [];
 
-        this.heroes = this.preAlloc(Hero, 10);
+        this.heroes = this.preAlloc(Hero, 5);
         this.preAllocs.push(this.heroes);
 
         this.towers = this.preAlloc(Tower, 10);
@@ -26,6 +26,7 @@
         this.preAllocs.push(this.bullets);
 
 
+       this.wave = new Wave(this);
 
  
 	};
@@ -36,27 +37,6 @@
 
     Game.prototype.getHeight = function () {
         return this.map.getHeight();
-    }
-
-    Game.prototype.spawnBullet = function (x,y) {
-        var res = new Bullet(this.stage, this.contentManager, this); 
-        res.setPosition(x,y);
-        this.bullets.push(res);
-        return res;
-    }
-
-    Game.prototype.spawnTower = function (x,y) {
-        var res = new Tower(this.stage, this.contentManager, this); 
-        res.setCellPosition(x,y);
-        this.towers.push(res);
-        return res;
-    }
-
-    Game.prototype.spawnTreasure = function (x,y) {
-        var res = new Treasure(this.stage, this.contentManager, this); 
-        res.setCellPosition(x,y);
-        this.treasures.push(res);
-        return res;
     }
 
     Game.prototype.preAlloc = function (Type, count) {
@@ -79,7 +59,7 @@
                 if(res.enabled==false)
                 {
                     res.enable();
-                    res.setCellPosition(x,y);
+                    res.setPosition(x,y);
                     return res;
                 }
             };
@@ -94,14 +74,6 @@
         };
         return null;
     }
-
-    Game.prototype.spawnTreasure = function (x,y) {
-        var treasure = new Treasure(this.stage, this.contentManager, this); 
-        treasure.setCellPosition(x,y);
-        this.treasures.push(treasure);
-        return treasure;
-    }
-
 
 
 	Game.prototype.tick = function (timeElapsed) {

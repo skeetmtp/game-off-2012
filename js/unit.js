@@ -5,10 +5,9 @@
         this.contentManager = contentManager;
         this.game = game;
 		createjs.Ticker.addListener(this);
-		this.x = 0;
-		this.y = 0;
-		this.dx = 0;
-		this.dy = 0;
+		this.fallSpeedMax = 200;
+
+		this.reset();
 		this.enabled = true;
 
 
@@ -36,27 +35,37 @@
 
 	};
 
+	Unit.prototype.reset = function () {
+		this.x = 0;
+		this.y = 0;
+		this.dx = 0;
+		this.dy = 0;
+	}
+
 	Unit.prototype.disable = function () {
 		this.enabled = false;
 		this.sprite.visible = this.enabled;
 	}
  
 	Unit.prototype.enable = function () {
+		this.reset();
 		this.enabled = true;
 		this.sprite.visible = this.enabled;
 	}
  
-	Unit.prototype.setCellPosition = function (cx,cy) {
-		this.x = cx * cellWidth;
-		this.y = cy * cellHeight;
+	Unit.prototype.setPosition = function (x,y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	Unit.prototype.tick = function (timeElapsed) {
 		if(this.enable == false)
 			return;
-		
+
 		var dt = timeElapsed / 1000;
         this.dy += window.gravity * dt;
+        if(this.dy>this.fallSpeedMax)
+        	this.dy=this.fallSpeedMax;
         this.y += this.dy;
         var maxY = this.game.getHeight() - window.cellHeight; 
         if(this.y>maxY)
