@@ -12,7 +12,9 @@
 		createjs.Ticker.addListener(this);
 
         this.heroes = [];
+        this.towers = [];
         this.treasures = [];
+        this.bullets = [];
  
 	};
 
@@ -24,11 +26,32 @@
         return this.map.getHeight();
     }
 
+    Game.prototype.spawnBullet = function (x,y) {
+        var res = new Bullet(this.stage, this.contentManager, this); 
+        res.setPosition(x,y);
+        this.bullets.push(res);
+        return res;
+    }
+
+    Game.prototype.spawnTower = function (x,y) {
+        var res = new Tower(this.stage, this.contentManager, this); 
+        res.setCellPosition(x,y);
+        this.towers.push(res);
+        return res;
+    }
+
+    Game.prototype.spawnTreasure = function (x,y) {
+        var res = new Treasure(this.stage, this.contentManager, this); 
+        res.setCellPosition(x,y);
+        this.treasures.push(res);
+        return res;
+    }
+
     Game.prototype.spawnHero = function (x,y) {
-        var hero = new Hero(this.stage, this.contentManager, this); 
-        hero.setCellPosition(x,y);
-        this.heroes.push(hero);
-        return hero;
+        var res = new Hero(this.stage, this.contentManager, this); 
+        res.setCellPosition(x,y);
+        this.heroes.push(res);
+        return res;
     }
 
     Game.prototype.findNearestHero = function (x,y) {

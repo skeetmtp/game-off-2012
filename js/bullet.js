@@ -1,6 +1,6 @@
 
 (function (window) {
-	function Bullet(stage, contentManager, game, spriteIndex) {
+	function Bullet(stage, contentManager, game) {
 		this.stage = stage;
         this.contentManager = contentManager;
         this.game = game;
@@ -29,14 +29,14 @@
 		var sprite = new createjs.BitmapAnimation(spriteSheet);
 		sprite.x = this.x;
 		sprite.y = this.y;
-		sprite.currentFrame = spriteIndex;
+		sprite.currentFrame = 96;
 		sprite.paused = true;
 		this.sprite = sprite;
 		
 		stage.addChild(sprite);
 
 	};
- 
+
 	Bullet.prototype.setTarget = function (target) {
 		this.dir.x = target.x - this.x;
 		this.dir.y = target.y - this.y;
