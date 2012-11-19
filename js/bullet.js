@@ -8,7 +8,7 @@
 
 		this.defaultLifeTime = 1500;
 		this.damage = 50;
-		this.speed = 100;
+		this.speed = 150;
 		this.hitRange = 16;
 		this.enabled = true;
 

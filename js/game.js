@@ -68,11 +68,23 @@
     }
 
     Game.prototype.findNearestHero = function (x,y) {
+        var minDist = 100000000;
+        var res = null;
         for (var i = 0; i < this.heroes.length; i++) {
-            if(this.heroes[i].enabled)
-                return this.heroes[i];
+            var hero = this.heroes[i];
+            if(hero.enabled)
+            {
+                var dx = x - hero.x;
+                var dy = y - hero.y;
+                var dist = NormVec2D(dx,dy);
+                if(minDist>dist)
+                {
+                    res = hero;
+                    minDist=dist;
+                }                    
+            }
         };
-        return null;
+        return res;
     }
 
 
