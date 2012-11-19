@@ -8,8 +8,8 @@
 		Unit.call(this, stage, contentManager, game,  "img/lofi_obj.png", 0);
 	};
 
-	Treasure.prototype.tick = function () {
-		Unit.prototype.tick.call(this);
+	Treasure.prototype.tick = function (timeElapsed) {
+		Unit.prototype.tick.call(this, timeElapsed);
 		
     };
 

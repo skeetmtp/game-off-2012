@@ -26,13 +26,12 @@ function init() {
 	var itemUI = new ItemUI(window.stage, null, game); 
 	
 	var tower = new Tower(window.stage, null, game); 
-	tower.setCellPosition(1,0);
+	tower.setCellPosition(18,0);
 
 	var treasure = new Treasure(window.stage, null, game); 
-	treasure.setCellPosition(2,0);
+	treasure.setCellPosition(20,0);
 
-	var hero = new Hero(window.stage, null, game); 
-	hero.setCellPosition(2,7);
+	game.spawnHero(1,0);
 
 	//var bullet = new Bullet(window.stage, null, game, 96); 
 	//var myUnit = new Unit(window.stage, null, game, "img/lofi_char.png", 1); 
@@ -51,7 +50,7 @@ function reset() {
 	window.stage.update();
 }
 
- function tick() {
+ function tick(timeElapsed) {
 	window.stage.update();
  	
  	var curFPS = createjs.Ticker.getMeasuredFPS();

@@ -35,7 +35,7 @@
 
 	};
 
-	Cursor.prototype.tick = function () {
+	Cursor.prototype.tick = function (timeElapsed) {
 		this.sprite.x = this.cellX * cellWidth;
 		this.sprite.y = this.cellY * cellHeight;
     };

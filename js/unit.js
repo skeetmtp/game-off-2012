@@ -7,6 +7,8 @@
 		createjs.Ticker.addListener(this);
 		this.x = 0;
 		this.y = 0;
+		this.dx = 0;
+		this.dy = 0;
 
 
 		var spriteSheet = new createjs.SpriteSheet({
@@ -37,9 +39,19 @@
 		this.y = cy * cellHeight;
 	}
 
-	Unit.prototype.tick = function () {
+	Unit.prototype.tick = function (timeElapsed) {
+		var dt = timeElapsed / 1000;
+        this.dy += window.gravity * dt;
+        this.y += this.dy;
+        var maxY = this.game.getHeight() - window.cellHeight; 
+        if(this.y>maxY)
+        	this.y = maxY;
+
+
+
 		this.sprite.x = this.x;
 		this.sprite.y = this.y;
+
     };
 
 	window.Unit = Unit;

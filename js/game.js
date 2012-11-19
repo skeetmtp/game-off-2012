@@ -10,11 +10,44 @@
         this.cursor = new Cursor(stage, null, this); 
 
 		createjs.Ticker.addListener(this);
- 
 
+        this.heroes = [];
+        this.treasures = [];
+ 
 	};
 
-	Game.prototype.tick = function () {
+    Game.prototype.getWidth = function () {
+        return this.map.getWidth();
+    }
+
+    Game.prototype.getHeight = function () {
+        return this.map.getHeight();
+    }
+
+    Game.prototype.spawnHero = function (x,y) {
+        var hero = new Hero(this.stage, this.contentManager, this); 
+        hero.setCellPosition(x,y);
+        this.heroes.push(hero);
+        return hero;
+    }
+
+    Game.prototype.findNearestHero = function (x,y) {
+        for (var i = 0; i < this.heroes.length; i++) {
+            return this.heroes[i];
+        };
+        return null;
+    }
+
+    Game.prototype.spawnTreasure = function (x,y) {
+        var treasure = new Treasure(this.stage, this.contentManager, this); 
+        treasure.setCellPosition(x,y);
+        this.treasures.push(treasure);
+        return treasure;
+    }
+
+
+
+	Game.prototype.tick = function (timeElapsed) {
         try {
             //console.log('ok');
         }

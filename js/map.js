@@ -48,6 +48,14 @@
 		}
 */
 
+		var g = new createjs.Graphics();
+		g.setStrokeStyle(1);
+		g.beginLinearGradientFill(['#C0C2F5','#FA90BE','#FEDCD3'], [0,0.25,1.0], 0, 0, 0, this.getHeight())
+		g.drawRect(0, 0, this.getWidth(), this.getHeight()); 
+		var s = new createjs.Shape(g);
+		stage.addChild(s);
+
+/*
 		for (var j = 0; j < tileCountY; j++) {
 			this.tiles[j] = [];
 			for (var i = 0; i < tileCountX; i++) {
@@ -63,7 +71,7 @@
 			}
 		}
 
-
+*/
 	};
 
 	Map.prototype.setTile = function (x,y,val) {
@@ -80,7 +88,7 @@
 		return cellHeight * this.tileCountY;
 	}
 
-	Map.prototype.tick = function () {
+	Map.prototype.tick = function (timeElapsed) {
         try {
         	//this.setTile(1,8,112);
             //console.log('ok');
