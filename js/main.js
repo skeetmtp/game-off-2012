@@ -4,6 +4,7 @@ var stage;
 
 });
 
+
 function init() {
 
 	// create a new stage and point it at our canvas:
@@ -22,12 +23,14 @@ function init() {
 	//createjs.Ticker.addListener(stage);
 	createjs.Ticker.addListener(window);
 
+
 	var game = new Game(window.stage, null, mapTileCountX, mapTileCountY);
+	//console.log(game);
 	var itemUI = new ItemUI(window.stage, null, game); 
 	
 	var tower 		= game.spawnTower(18,0);
 	var treasure 	= game.spawnTreasure(20,0);
-	var hero 		= game.spawnHero(1,0);
+	var hero 		= game.spawn(Hero,1,0);
 
 	//var bullet = new Bullet(window.stage, null, game, 96); 
 	//var myUnit = new Unit(window.stage, null, game, "img/lofi_char.png", 1); 

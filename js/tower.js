@@ -12,6 +12,9 @@
 	};
 
 	Tower.prototype.tick = function (timeElapsed) {
+		if(this.enabled == false)
+			return;
+		
 		Unit.prototype.tick.call(this, timeElapsed);
 
 		if(this.currentCooldown>=0) {

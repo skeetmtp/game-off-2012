@@ -9,6 +9,7 @@
 		this.y = 0;
 		this.dx = 0;
 		this.dy = 0;
+		this.enabled = true;
 
 
 		var spriteSheet = new createjs.SpriteSheet({
@@ -28,11 +29,22 @@
 		sprite.y = this.y;
 		sprite.currentFrame = spriteIndex;
 		sprite.paused = true;
+		sprite.visible = this.enabled;
 		this.sprite = sprite;
 		
 		stage.addChild(sprite);
 
 	};
+
+	Unit.prototype.disable = function () {
+		this.enabled = false;
+		this.sprite.visible = this.enabled;
+	}
+ 
+	Unit.prototype.enable = function () {
+		this.enabled = true;
+		this.sprite.visible = this.enabled;
+	}
  
 	Unit.prototype.setCellPosition = function (cx,cy) {
 		this.x = cx * cellWidth;
@@ -40,6 +52,9 @@
 	}
 
 	Unit.prototype.tick = function (timeElapsed) {
+		if(this.enable == false)
+			return;
+		
 		var dt = timeElapsed / 1000;
         this.dy += window.gravity * dt;
         this.y += this.dy;

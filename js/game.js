@@ -11,10 +11,22 @@
 
 		createjs.Ticker.addListener(this);
 
-        this.heroes = [];
-        this.towers = [];
-        this.treasures = [];
-        this.bullets = [];
+        this.preAllocs = [];
+
+        this.heroes = this.preAlloc(Hero, 10);
+        this.preAllocs.push(this.heroes);
+
+        this.towers = this.preAlloc(Tower, 10);
+        this.preAllocs.push(this.towers);
+
+        this.treasures = this.preAlloc(Treasure, 10);
+        this.preAllocs.push(this.treasures);
+
+        this.bullets = this.preAlloc(Bullet, 10);
+        this.preAllocs.push(this.bullets);
+
+
+
  
 	};
 
@@ -47,16 +59,38 @@
         return res;
     }
 
-    Game.prototype.spawnHero = function (x,y) {
-        var res = new Hero(this.stage, this.contentManager, this); 
-        res.setCellPosition(x,y);
-        this.heroes.push(res);
+    Game.prototype.preAlloc = function (Type, count) {
+        var res = [];
+        for (var i = 0; i < count; i++) {
+            var element = new Type(this.stage, this.contentManager, this);
+            element.disable();
+            res.push(element);
+        };
         return res;
+    }
+
+    Game.prototype.spawn = function (Type, x,y) {
+        for (var j = 0; j < this.preAllocs.length; j++) {
+            var elements = this.preAllocs[j];
+            for (var i = 0; i < elements.length; i++) {
+                var res = elements[i]; 
+                if(res.constructor != Type)
+                    break;
+                if(res.enabled==false)
+                {
+                    res.enable();
+                    res.setCellPosition(x,y);
+                    return res;
+                }
+            };
+        }
+        return null;
     }
 
     Game.prototype.findNearestHero = function (x,y) {
         for (var i = 0; i < this.heroes.length; i++) {
-            return this.heroes[i];
+            if(this.heroes[i].enabled)
+                return this.heroes[i];
         };
         return null;
     }
