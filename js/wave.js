@@ -9,7 +9,7 @@
 
 	Wave.prototype.spawn = function (timeElapsed) {
 		this.currentCooldown = this.defaultCooldown;
-		this.game.spawn(Hero, 0, 0);
+		this.game.spawn(Hero, 0, this.game.getHeight()-cellHeight*2);
 	}
  
 	Wave.prototype.tick = function (timeElapsed) {

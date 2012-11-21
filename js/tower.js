@@ -29,7 +29,7 @@
 	Tower.prototype.throwBullet = function () {
 		//console.log("throwBullet");
 		this.currentCooldown = this.defaultCooldown;
-		var target = this.game.findNearestHero(this.x,this.y);
+		var target = this.game.findNearest(Hero,this.x,this.y);
 		if(target==null)
 			return;
 		var bullet = this.game.spawn(Bullet, this.x, this.y);

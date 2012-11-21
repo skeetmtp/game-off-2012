@@ -26,11 +26,9 @@ function init() {
 
 	var game = new Game(window.stage, null, mapTileCountX, mapTileCountY);
 	//console.log(game);
-	var itemUI = new ItemUI(window.stage, null, game); 
-	
+	 
+	var tower 		= game.spawn(Tower,700,0);
 	var tower 		= game.spawn(Tower,500,0);
-	var treasure 	= game.spawn(Treasure,600,0);
-	var hero 		= game.spawn(Hero,10,0);
 
 	//var bullet = new Bullet(window.stage, null, game, 96); 
 	//var myUnit = new Unit(window.stage, null, game, "img/lofi_char.png", 1); 

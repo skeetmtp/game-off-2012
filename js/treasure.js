@@ -13,6 +13,11 @@
 		
     };
 
+    Treasure.prototype.destroy = function () {
+		this.disable();
+	}
+
+
 	window.Treasure = Treasure;
 } (window));
 

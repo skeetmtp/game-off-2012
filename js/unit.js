@@ -45,6 +45,7 @@
 	Unit.prototype.disable = function () {
 		this.enabled = false;
 		this.sprite.visible = this.enabled;
+		this.reset();
 	}
  
 	Unit.prototype.enable = function () {
@@ -56,6 +57,8 @@
 	Unit.prototype.setPosition = function (x,y) {
 		this.x = x;
 		this.y = y;
+		this.sprite.x = this.x;
+		this.sprite.y = this.y;
 	}
 
 	Unit.prototype.tick = function (timeElapsed) {

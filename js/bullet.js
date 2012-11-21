@@ -99,7 +99,7 @@
 		this.sprite.x = this.x;
 		this.sprite.y = this.y;
 
-		var hero = this.game.findNearestHero(this.x,this.y);
+		var hero = this.game.findNearest(Hero,this.x,this.y);
 		if(hero != null) {
 			var dx = this.x - hero.x;
 			var dy = this.y - hero.y;

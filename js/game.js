@@ -1,15 +1,18 @@
 
 (function (window) {
 	function Game(stage, contentManager, tileCountX, tileCountY) {
+        this.treasureSpawnPeriod = 100;
+
 		this.stage = stage;
         this.contentManager = contentManager;
         this.tileCountX = tileCountX;
         this.tileCountY = tileCountY;
 
         this.map = new Map(stage, contentManager, tileCountX, tileCountY);
-        this.cursor = new Cursor(stage, null, this); 
+        this.cursor = new Cursor(stage, contentManager, this); 
+        //this.itemUI = new ItemUI(stage, contentManager, this); 
+        this.score = new ScoreUI(stage, contentManager, this); 
 
-		createjs.Ticker.addListener(this);
 
         this.preAllocs = [];
 
@@ -26,10 +29,17 @@
         this.preAllocs.push(this.bullets);
 
 
-       this.wave = new Wave(this);
+        this.wave = new Wave(this);
+
+        this.reset();
 
  
+        createjs.Ticker.addListener(this);
 	};
+
+    Game.prototype.reset = function () {
+        this.goldRequiredToSpawnNextTreasure = 0;
+    }
 
     Game.prototype.getWidth = function () {
         return this.map.getWidth();
@@ -67,33 +77,37 @@
         return null;
     }
 
-    Game.prototype.findNearestHero = function (x,y) {
+    Game.prototype.findNearest = function (Type,x,y) {
         var minDist = 100000000;
         var res = null;
-        for (var i = 0; i < this.heroes.length; i++) {
-            var hero = this.heroes[i];
-            if(hero.enabled)
-            {
-                var dx = x - hero.x;
-                var dy = y - hero.y;
-                var dist = NormVec2D(dx,dy);
-                if(minDist>dist)
+        for (var j = 0; j < this.preAllocs.length; j++) {
+            var elements = this.preAllocs[j];
+            for (var i = 0; i < elements.length; i++) {
+                var elem = elements[i]; 
+                if(elem.constructor != Type)
+                    break;
+                if(elem.enabled)
                 {
-                    res = hero;
-                    minDist=dist;
-                }                    
-            }
-        };
+                    var dx = x - elem.x;
+                    var dy = y - elem.y;
+                    var dist = NormVec2D(dx,dy);
+                    if(minDist>dist)
+                    {
+                        res = elem;
+                        minDist=dist;
+                    }                    
+                }
+            };
+            if(res) return res;
+        }
         return res;
     }
 
 
 	Game.prototype.tick = function (timeElapsed) {
-        try {
-            //console.log('ok');
-        }
-        catch (e) {
-            console.log('Error', e);
+        if(this.score.gold >= this.goldRequiredToSpawnNextTreasure) {
+           this.goldRequiredToSpawnNextTreasure += this.treasureSpawnPeriod;
+           var treasure    = this.spawn(Treasure, this.getWidth() * MyRandom()|0,0);
         }
     };
 
